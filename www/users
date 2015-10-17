@@ -1,0 +1,15 @@
+{
+	"Menu" : 
+	{
+		"Mobile":
+		  {
+		    "string": "Smart",
+		    "string": "Sun",
+		    "string": "Globe",
+		    "string": "TNT"
+		  },
+		  "Favorites": null,
+		  "Custom": null,
+		  "Promo": null
+	}
+}

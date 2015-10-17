@@ -1,0 +1,14 @@
+<ion-view view-title="New Code">
+ <ion-content padding="true">
+    <form ng-submit="saveCode()">
+      <label>Code name:</label>
+      <textarea ng-model="formData.name"></textarea>
+      <label>Code text:</label>
+      <textarea ng-model="formData.text"></textarea>
+
+       <label>Send to:</label>
+      <textarea ng-model="formData.sendto"></textarea>
+      <button type="submit" class="button button-positive button-block">Create</button>
+    </form>
+  </ion-content>
+</ion-view>

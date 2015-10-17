@@ -1,0 +1,21 @@
+<ion-view view-title="New Code">
+ <ion-content padding="true">
+    <form ng-submit="saveCode()">
+
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="Name" ng-model="formData.name">
+        </label>
+        <label class="item item-input">
+          <textarea type="text" placeholder="Message to send" ng-model="formData.text"></textarea>
+        </label>
+        <label class="item item-input">
+          <input type= "text" placeholder="Send to:" ng-model="formData.sendto">
+        </label>
+
+        <button type="submit" class="button button-positive button-block">Save it.</button>
+
+      </div>
+    </form>
+  </ion-content>
+</ion-view>
