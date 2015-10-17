@@ -179,11 +179,17 @@ angular.module('starter.controllers',  [])
 
    customcodes.codes.push({
       name: $scope.formData.name,
+      desc: $scope.formData.desc,
       text: $scope.formData.text,
       sento: $scope.formData.sendto,
    });
-    $localstorage.setObject("customcodes", customcodes );    
-   
+
+  $localstorage.setObject("customcodes", customcodes );    
+   $scope.formData.sendto ="";
+   $scope.formData.name ="";
+   $scope.formData.text ="";
+   $scope.formData.desc ="";
+   alert ('Code save');
   }
 })
 
