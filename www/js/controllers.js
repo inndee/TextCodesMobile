@@ -119,7 +119,17 @@ angular.module('starter.controllers',  [])
   console.log($state.params);
 
 
-  $scope.Title = $state.params;
+  if ( $state.params.id != undefined)
+    $scope.GroupId = $state.params.id.substr(1).capitalizeFirstLetter();
+
+  if ( $scope.Groups != undefined )
+  {
+    app.getArraySubObjects( $scope.Groups ).forEach(function(entry) {
+    if ( entry.id == $state.params.id.substr(1) )
+      $scope.SubList = entry.SubGroups;
+    });
+  };
+
   
   $scope.toggleGroup = function(group) {
     group.show = !group.show;

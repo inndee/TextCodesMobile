@@ -1,9 +1,9 @@
 <TextCodes>
-	<Group id = "fav" name = "Favorites" icon = "ion-android-favorite" >
+	<Group id = "favorites" name = "Favorites" icon = "ion-android-favorite" >
 		
 	</Group>
 	<Group id = "mobile" name = "Mobile" icon = "ion-iphone">
-		<Subgroups>
+		<SubGroups>
 			<network id = "smart" name = "Smart" icon = "smart.png">
 					<service name = "call">
 
@@ -13,8 +13,8 @@
 			</network> 
 			<network id = "sun" name = "Sun" icon = "smart.png">
 			</network> 
-		</Subgroups>
+		</SubGroups>
 	</Group>
-	<Group id = "promo" name = "Promos" icon = "ion-android-list"></Group>
-	<Group id = "customcodes" name = "Custom Codes" icon = "ion-code"></Group>
+	<Group id = "promotions" name = "Promos" icon = "ion-android-list"></Group>
+	<Group id = "custom codes" name = "Custom Codes" icon = "ion-code"></Group>
 </TextCodes>

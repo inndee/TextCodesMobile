@@ -73,7 +73,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'ngResource', ])
     })
 
   .state('app.single', {
-    url: '/group/:group',
+    url: '/group/:id',
     views: {
       'menuContent': {
         templateUrl: 'templates/playlists.html',
