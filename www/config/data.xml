@@ -1,0 +1,20 @@
+<TextCodes>
+	<Group id = "fav" name = "Favorites" icon = "ion-android-favorite" >
+		
+	</Group>
+	<Group id = "mobile" name = "Mobile" icon = "ion-iphone">
+		<Subgroups>
+			<network id = "smart" name = "Smart" icon = "smart.png">
+					<service name = "call">
+
+					</service>
+			</network> 
+			<network id = "globe" name = "Globe" icon = "smart.png">
+			</network> 
+			<network id = "sun" name = "Sun" icon = "smart.png">
+			</network> 
+		</Subgroups>
+	</Group>
+	<Group id = "promo" name = "Promos" icon = "ion-android-list"></Group>
+	<Group id = "customcodes" name = "Custom Codes" icon = "ion-code"></Group>
+</TextCodes>

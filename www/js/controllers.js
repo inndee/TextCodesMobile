@@ -41,7 +41,7 @@ angular.module('starter.controllers',  [])
 })
 
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http ,$localstorage , Post ) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http ,$localstorage , $stateParams, $state,Post ) {
 
   var app = new AppFrame();
 
@@ -110,36 +110,16 @@ angular.module('starter.controllers',  [])
   };
 
   //Initiate SideMenu options
-  $http.get("config/sidemenu.xml").then(function(response)
+  $http.get("config/data.xml").then(function(response)
   {
-      $scope.Groups = [];
-      $scope.sidemenu = convertToJson( response.data ); 
-      var ind = 0;
-
-      $scope.sidemenu.Menu.Group.forEach( function (group) {
-        
-        var subitems = [];
-        if (! app.isArray( group.Subgroup )) {
-          subitems.push( group.Subgroup );
-        } else {
-          subitems = group.Subgroup;
-        }
-        
-        if ( group.id == "CUSTOMCODES" )
-        {
-          subitems = $localstorage.getObject("customcodes").codes;
-        }
-
-        $scope.Groups.push({
-              name : group.name,
-              id : group.id,
-              icon : group.icon,
-              items : subitems ,
-              show :false   
-        });
-        ++ind;
-      });
+      $scope.Groups =  app.parseData(response).TextCodes.Group;
   }); 
+
+
+  console.log($state.params);
+
+
+  $scope.Title = $state.params;
   
   $scope.toggleGroup = function(group) {
     group.show = !group.show;
@@ -148,6 +128,7 @@ angular.module('starter.controllers',  [])
     return group.show;
   };
 
+   
 
 
 
