@@ -14,3 +14,16 @@ AppFrame.prototype.isArray= function( variable ) {
     return true;
 	}
 };
+
+
+
+AppFrame.prototype.parseData = function( xmldata ) {
+   var jsondata = convertToJson( xmldata.data );
+   console.log( "parseData", jsondata );
+   return jsondata;
+};
+
+
+String.prototype.capitalizeFirstLetter = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}

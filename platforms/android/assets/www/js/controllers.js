@@ -20,6 +20,15 @@ angular.module('starter.controllers',  [])
       }
       return true;
     },
+    getAllkeys : function ()
+    {
+      var keys = [];
+      for (var key in $window.localStorage){
+         keys.push (key);
+      }
+      return keys;
+
+    },
     removeObjectLocalStorage : function( key ) {
       $window.localstorage.removeItem(key);
       console.log ( "Key removed" , key );
@@ -32,9 +41,17 @@ angular.module('starter.controllers',  [])
 })
 
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http ,$localstorage , Post ) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http ,$localstorage , $stateParams, $state,Post ) {
 
   var app = new AppFrame();
+
+
+   if ( ! $localstorage.isExist("customcodes") ) {
+    $localstorage.setObject('customcodes', {
+      codes: [],
+    });
+  }; 
+
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -93,34 +110,26 @@ angular.module('starter.controllers',  [])
   };
 
   //Initiate SideMenu options
-  $http.get("config/sidemenu.xml").then(function(response)
+  $http.get("config/data.xml").then(function(response)
   {
-      $scope.Groups = [];
-      $scope.sidemenu = convertToJson( response.data ); 
-      var ind = 0;
-
-      $scope.sidemenu.Menu.Group.forEach( function (group) {
-        
-        var subitems = [];
-        if (! app.isArray( group.Subgroup )) {
-          subitems.push( group.Subgroup );
-        } else {
-          subitems = group.Subgroup;
-        }
-
-
-        $scope.Groups.push({
-              name : group.name,
-              id : group.id,
-              icon : group.icon,
-              items : subitems ,
-              show :false   
-        });  
-
-        
-        ++ind;
-      });
+      $scope.Groups =  app.parseData(response).TextCodes.Group;
   }); 
+
+
+  console.log($state.params);
+
+
+  if ( $state.params.id != undefined)
+    $scope.GroupId = $state.params.id.substr(1).capitalizeFirstLetter();
+
+  if ( $scope.Groups != undefined )
+  {
+    app.getArraySubObjects( $scope.Groups ).forEach(function(entry) {
+    if ( entry.id == $state.params.id.substr(1) )
+      $scope.SubList = entry.SubGroups;
+    });
+  };
+
   
   $scope.toggleGroup = function(group) {
     group.show = !group.show;
@@ -129,6 +138,7 @@ angular.module('starter.controllers',  [])
     return group.show;
   };
 
+   
 
 
 
@@ -149,11 +159,9 @@ angular.module('starter.controllers',  [])
 .controller('NewCodeCtrl', function($scope , $localstorage ,$window) {
    $scope.formData = {};
 
-  if ( $localstorage.isExist("customcodes") ) {
-    $localstorage.setObject('customcodes', {
-      codes: [],
-    });
-  }; 
+ 
+
+
 
    $scope.saveCode = function() {
 
@@ -162,12 +170,17 @@ angular.module('starter.controllers',  [])
 
    customcodes.codes.push({
       name: $scope.formData.name,
+      desc: $scope.formData.desc,
       text: $scope.formData.text,
       sento: $scope.formData.sendto,
    });
-    $localstorage.setObject("customcodes", customcodes );
-    console.log ( "New Code save ", $scope.formData.text );
-    alert( $localstorage.getObject("customcodes") );
+
+  $localstorage.setObject("customcodes", customcodes );    
+   $scope.formData.sendto ="";
+   $scope.formData.name ="";
+   $scope.formData.text ="";
+   $scope.formData.desc ="";
+   alert ('Code save');
   }
 })
 
